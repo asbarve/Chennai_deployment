@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>RiskMap Chennai Deployment</title>
+  <meta charset='utf-8' />
+  <title></title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.js'></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.css' rel='stylesheet' />
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%
+    }
+
+    .title {
+      position: absolute;
+      right: 30px;
+      top: 20px;
+      z-index: 9999;
+      color: #fff;
+      font-size: 28px;
+      font-family: 'Roboto Condensed', Arial
+    }
+
+    .subtitle {
+      position: absolute;
+      right: 30px;
+      top: 75px;
+      z-index: 9999;
+      color: #fff;
+      font-size: 16px;
+      font-family: 'Roboto Condensed', Arial
+    }
+
+    #legend {
+      position: absolute;
+      width: 170px;
+      height: 150px;
+      right: 20px;
+      bottom: 50px;
+      z-index: 2;
+      background-color: rgba(255, 255, 255, .7);
+      padding: 10px;
+      border-radius: 7px
+    }
+
+    .mapboxgl-popup-content {
+      padding: 10 px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      pointer-events: none;
+      width: 200px
+    }
+
+    .mapboxgl-popup-anchor-bottom {
+      margin-top: -10 px
+    }
+
+    .mapboxgl-popup-anchor-top {
+      margin-top: 10 px
+    }
+
+    .mapboxgl-popup-anchor-left {
+      margin-right: -10 px
+    }
+
+    .mapboxgl-popup-anchor-right {
+      margin-right: 10 px
+    }
+
+    .mapboxgl-popup-anchor-bottom.mapboxgl-popup-tip {
+      border-top-color: rgba(0, 0, 0, 0.75)
+    }
+
+    .mapboxgl-popup-anchor-top.mapboxgl-popup-tip {
+      border-bottom-color: rgba(0, 0, 0, 0.75)
+    }
+
+    .mapboxgl-popup-anchor-left.mapboxgl-popup-tip {
+      border-right-color: rgba(0, 0, 0, 0.75)
+    }
+
+    .mapboxgl-popup-anchor-right.mapboxgl-popup-tip {
+      border-left-color: rgba(0, 0, 0, 0.75)
+    }
+  </style>
+</head>
+
+<body>
+  <p class="title">Riskmap India</p>
+  <p class="subtitle">Reports recieved between last 7 days</p>
+  <div id='map'></div>
+  <div id='nav' class='menu-ui'><a href="#" data-position='80.2707,13.0827'>Chennai</a></div>
+  <script>
+    var _0x158f=["\x61\x63\x63\x65\x73\x73\x54\x6F\x6B\x65\x6E","\x70\x6B\x2E\x65\x79\x4A\x31\x49\x6A\x6F\x69\x59\x58\x4E\x69\x59\x58\x4A\x32\x5A\x53\x49\x73\x49\x6D\x45\x69\x4F\x69\x49\x34\x63\x32\x5A\x70\x4E\x7A\x68\x56\x49\x6E\x30\x2E\x41\x31\x6C\x53\x69\x6E\x6E\x57\x73\x71\x72\x37\x6F\x43\x55\x6F\x30\x55\x4D\x54\x37\x77","\x6D\x61\x70","\x6D\x61\x70\x62\x6F\x78\x3A\x2F\x2F\x73\x74\x79\x6C\x65\x73\x2F\x6D\x61\x70\x62\x6F\x78\x2F\x64\x61\x72\x6B\x2D\x76\x39","\x6F\x6E\x63\x6C\x69\x63\x6B","\x6E\x61\x76","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x70\x72\x65\x76\x65\x6E\x74\x44\x65\x66\x61\x75\x6C\x74","\x64\x61\x74\x61\x2D\x70\x6F\x73\x69\x74\x69\x6F\x6E","\x67\x65\x74\x41\x74\x74\x72\x69\x62\x75\x74\x65","\x74\x61\x72\x67\x65\x74","\x2C","\x73\x70\x6C\x69\x74","\x66\x6C\x79\x54\x6F","\x72\x65\x73\x70\x6F\x6E\x73\x65\x54\x65\x78\x74","\x70\x61\x72\x73\x65","\x72\x65\x70\x6F\x72\x74\x73","\x67\x65\x6F\x6A\x73\x6F\x6E","\x72\x65\x73\x75\x6C\x74","\x61\x64\x64\x53\x6F\x75\x72\x63\x65","\x63\x69\x72\x63\x6C\x65","\x76\x69\x73\x69\x62\x6C\x65","\x23\x66\x30\x30","\x72\x65\x70\x6F\x72\x74\x5F\x64\x61\x74\x61\x2E\x66\x6C\x6F\x6F\x64\x5F\x64\x65\x70\x74\x68","\x61\x64\x64\x4C\x61\x79\x65\x72","\x72\x65\x70\x6F\x72\x74\x2D\x64\x6F\x74\x73","\x46\x65\x74\x63\x68\x20\x45\x72\x72\x6F\x72\x20\x3A\x2D\x53","\x6C\x6F\x67","\x6F\x6E\x6C\x6F\x61\x64","\x6F\x6E\x65\x72\x72\x6F\x72","\x67\x65\x74","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x64\x61\x74\x61\x2E\x72\x69\x73\x6B\x6D\x61\x70\x2E\x69\x6E\x2F\x72\x65\x70\x6F\x72\x74\x73\x3F\x63\x69\x74\x79\x3D\x63\x68\x6E\x26\x67\x65\x6F\x66\x6F\x72\x6D\x61\x74\x3D\x67\x65\x6F\x6A\x73\x6F\x6E\x26\x74\x69\x6D\x65\x70\x65\x72\x69\x6F\x64\x3D\x36\x30\x34\x38\x30\x30","\x6F\x70\x65\x6E","\x73\x65\x6E\x64","\x63\x6C\x69\x63\x6B","\x70\x6F\x69\x6E\x74","\x71\x75\x65\x72\x79\x52\x65\x6E\x64\x65\x72\x65\x64\x46\x65\x61\x74\x75\x72\x65\x73","\x6C\x65\x6E\x67\x74\x68","\x61\x64\x64\x54\x6F","\x20\x3C\x46\x6F\x6E\x74\x73\x69\x7A\x65\x3D\x35\x3E\x3C\x55\x3E\x20","\x63\x72\x65\x61\x74\x65\x64\x5F\x61\x74","\x70\x72\x6F\x70\x65\x72\x74\x69\x65\x73","\x20\x44\x61\x79\x73\x20\x61\x67\x6F\x20\x3C\x2F\x66\x6F\x6E\x74\x3E\x3C\x2F\x55\x3E\x20\x3C\x73\x70\x61\x6E\x20\x63\x6C\x61\x73\x73\x3D\x2E\x6D\x61\x70\x62\x6F\x78\x67\x6C\x2D\x70\x6F\x70\x75\x70\x2D\x63\x6F\x6E\x74\x65\x6E\x74\x3E\x20","\x20\x3C\x62\x72\x3E\x3C\x62\x3E\x20","\x74\x65\x78\x74","\x20\x3C\x2F\x62\x3E","\x3C\x62\x72\x3E","\x73\x65\x74\x48\x54\x4D\x4C","\x75\x6E\x70\x72\x6F\x6A\x65\x63\x74","\x73\x65\x74\x4C\x6E\x67\x4C\x61\x74","\x50\x6F\x70\x75\x70","\x6F\x6E","\x6D\x6F\x75\x73\x65\x6D\x6F\x76\x65","\x63\x75\x72\x73\x6F\x72","\x73\x74\x79\x6C\x65","\x67\x65\x74\x43\x61\x6E\x76\x61\x73","\x70\x6F\x69\x6E\x74\x65\x72","","\x73\x6C\x69\x63\x65","\x6E\x6F\x77","\x74\x6F\x46\x69\x78\x65\x64","\x73\x65\x63","\x6D\x69\x6E","\x68\x72\x73"];mapboxgl[_0x158f[0]]= _0x158f[1];var map= new mapboxgl.Map({container:_0x158f[2],style:_0x158f[3],center:[80.27,13.08],minZoom:10});document[_0x158f[6]](_0x158f[5])[_0x158f[4]]= function(_0x1326x2){_0x1326x2[_0x158f[7]]();var _0x1326x3=_0x1326x2[_0x158f[10]][_0x158f[9]](_0x158f[8]);if(_0x1326x3){var _0x1326x4=_0x1326x3[_0x158f[12]](_0x158f[11]);map[_0x158f[13]]({center:_0x1326x4,zoom:10})}};function reqListener(){var _0x1326x6=JSON[_0x158f[15]](this[_0x158f[14]]);map[_0x158f[19]](_0x158f[16],{type:_0x158f[17],data:_0x1326x6[_0x158f[18]]});map[_0x158f[24]]({"\x69\x64":_0x158f[16],"\x74\x79\x70\x65":_0x158f[20],"\x73\x6F\x75\x72\x63\x65":_0x158f[16],"\x6C\x61\x79\x6F\x75\x74":{"\x76\x69\x73\x69\x62\x69\x6C\x69\x74\x79":_0x158f[21]},"\x70\x61\x69\x6E\x74":{"\x63\x69\x72\x63\x6C\x65\x2D\x62\x6C\x75\x72":1,"\x63\x69\x72\x63\x6C\x65\x2D\x63\x6F\x6C\x6F\x72":_0x158f[22],"\x63\x69\x72\x63\x6C\x65\x2D\x6F\x70\x61\x63\x69\x74\x79":{property:_0x158f[23],base:0.1,stops:[[{zoom:8,value:10},0.01],[{zoom:0,value:50},0.1]]},"\x63\x69\x72\x63\x6C\x65\x2D\x72\x61\x64\x69\x75\x73":{property:_0x158f[23],base:1.8,stops:[[{zoom:0,value:100},0.5],[{zoom:0,value:150},15]]}}}),map[_0x158f[24]]({id:_0x158f[25],type:_0x158f[20],source:_0x158f[16],paint:{"\x63\x69\x72\x63\x6C\x65\x2D\x72\x61\x64\x69\x75\x73":1.5,"\x63\x69\x72\x63\x6C\x65\x2D\x63\x6F\x6C\x6F\x72":_0x158f[22]}})}function reqError(_0x1326x8){console[_0x158f[27]](_0x158f[26],_0x1326x8)}var oReq= new XMLHttpRequest();oReq[_0x158f[28]]= reqListener;oReq[_0x158f[29]]= reqError;oReq[_0x158f[32]](_0x158f[30],_0x158f[31],!0);oReq[_0x158f[33]]();map[_0x158f[51]](_0x158f[34],function(_0x1326xa){var _0x1326xb=map[_0x158f[36]](_0x1326xa[_0x158f[35]],{layers:[_0x158f[16]]});if(_0x1326xb[_0x158f[37]]){var _0x1326xc=_0x1326xb[0];( new mapboxgl[_0x158f[50]])[_0x158f[49]](map[_0x158f[48]](_0x1326xa[_0x158f[35]]))[_0x158f[47]]([_0x158f[39]]+ expressTime(_0x1326xc[_0x158f[41]][_0x158f[40]])[0]+ [_0x158f[42]]+ [_0x158f[43]]+ _0x1326xc[_0x158f[41]][_0x158f[44]]+ [_0x158f[45]]+ [_0x158f[46]])[_0x158f[38]](map)}}),map[_0x158f[51]](_0x158f[52],function(_0x1326xc){var _0x1326xb=map[_0x158f[36]](_0x1326xc[_0x158f[35]],{layers:[_0x158f[16]]});map[_0x158f[55]]()[_0x158f[54]][_0x158f[53]]= (_0x1326xb[_0x158f[37]])?_0x158f[56]:_0x158f[57]});function expressTime(_0x1326xc){var _0x1326xe=_0x1326xc[_0x158f[58]](0,10);var _0x1326xf=Date[_0x158f[15]](_0x1326xe);var _0x1326xa=Date[_0x158f[59]]()- _0x1326xf;if(_0x1326xa< 60000* 1.5){return [(_0x1326xa/ 1000)[_0x158f[60]](0),_0x158f[61]]};if(_0x1326xa< 3600000* 1.5){return [(_0x1326xa/ 60000)[_0x158f[60]](0),_0x158f[62]]};if(_0x1326xa< 86400000* 1.5){return [(_0x1326xa/ 3600000)[_0x158f[60]](0),_0x158f[63]]}else {return [(_0x1326xa/ 86400000)[_0x158f[60]](0)]}}
+  </script>
+</body>
+
+</html>
